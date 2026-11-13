@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Brinewell | Small-batch ferments</title>
+<meta name="description" content="Brinewell makes naturally fermented pickles with cucumbers, sea salt, dill and garlic. No vinegar, packed by hand.">
+<link rel="icon" href="Brand-Assets/brinewell-logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          dill: '#23452F', deep: '#4E7A4A', leaf: '#7FA36B',
+          seed: '#C9A227', flesh: '#F3F5E6', celery: '#E4EAD5',
+          ink: '#1B2A20', muted: '#5E7A55'
+        },
+        fontFamily: {
+          display: ['Fraunces', 'Georgia', 'serif'],
+          body: ['Karla', 'Arial', 'sans-serif']
+        }
+      }
+    }
+  }
+</script>
+<style>
+  :root{
+    --dill:#23452F; --deep:#4E7A4A; --leaf:#7FA36B; --seed:#C9A227;
+    --flesh:#F3F5E6; --celery:#E4EAD5; --ink:#1B2A20; --muted:#5E7A55;
+    /* spacing tokens */
+    --s-1:8px; --s-2:16px; --s-3:24px; --s-4:40px; --s-5:64px; --s-6:104px;
+    --spring:cubic-bezier(.34,1.56,.64,1);
+    --ease:cubic-bezier(.22,1,.36,1);
+    /* depth */
+    --elev-1:0 1px 0 rgba(35,69,47,.06), 0 10px 28px -14px rgba(35,69,47,.28);
+    --elev-2:0 2px 0 rgba(35,69,47,.05), 0 24px 48px -20px rgba(35,69,47,.38), 0 8px 16px -10px rgba(35,69,47,.2);
+  }
+  html{scroll-behavior:smooth}
+  body{background:var(--celery);color:var(--ink);font-family:'Karla',Arial,sans-serif;line-height:1.7;-webkit-font-smoothing:antialiased}
+  .display{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-0.03em;line-height:1.02;color:var(--dill)}
+  .section{padding-block:var(--s-6)}
+  @media (max-width:767px){ .section{padding-block:var(--s-5)} }
+
+  /* grain */
+  .grain{position:relative;isolation:isolate}
+  .grain::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;opacity:.35;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .14 0 0 0 0 .27 0 0 0 0 .18 0 0 0 .22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+  .hero-bg{background:
+    radial-gradient(60% 70% at 85% 30%, rgba(127,163,107,.35), transparent 70%),
+    radial-gradient(40% 50% at 10% 90%, rgba(201,162,39,.14), transparent 70%),
+    radial-gradient(50% 60% at 50% 0%, rgba(243,245,230,.9), transparent 70%),
+    var(--celery)}
+
+  /* buttons, per guidelines */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:'Karla',sans-serif;font-weight:700;font-size:18px;line-height:1;
+    border-radius:999px;padding:16px 30px;border:2px solid transparent;cursor:pointer;text-decoration:none;
+    transition:transform .35s var(--spring), opacity .2s ease;}
+  .btn:focus-visible{outline:3px solid var(--seed);outline-offset:3px}
+  .btn:hover{transform:translateY(-2px)}
+  .btn:active{transform:translateY(2px)}
+  .btn-p{background:var(--dill);color:var(--flesh);box-shadow:0 2px 0 #142a1c,0 10px 20px -10px rgba(35,69,47,.6)}
+  .btn-p:hover{background:#2D5A3D}
+  .btn-p:active{background:#183324;box-shadow:none}
+  .btn-s{background:var(--seed);color:var(--dill);box-shadow:0 2px 0 #9E7E17,0 10px 20px -10px rgba(201,162,39,.7)}
+  .btn-s:hover{background:#D6B13A}
+  .btn-s:active{background:#B38F1F;box-shadow:none}
+  .btn-s:focus-visible{outline-color:var(--flesh)}
+  .btn-o{background:transparent;color:var(--dill);border-color:var(--dill)}
+  .btn-o:hover{background:rgba(35,69,47,.08)}
+  .btn-o:active{background:rgba(35,69,47,.16)}
+
+  .link{color:var(--dill);text-decoration:none;font-weight:500;position:relative;padding-block:4px;border-radius:4px}
+  .link::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--seed);transform:scaleX(0);transform-origin:left;transition:transform .35s var(--ease)}
+  .link:hover::after{transform:scaleX(1)}
+  .link:active{opacity:.7}
+  .link:focus-visible{outline:3px solid var(--seed);outline-offset:4px}
+
+  .tag{display:inline-block;font-weight:700;font-size:14px;line-height:1;padding:8px 14px;border-radius:999px}
+
+  /* product cards */
+  .card{background:var(--flesh);border-radius:24px;box-shadow:var(--elev-1);overflow:hidden;transition:transform .45s var(--spring)}
+  .card:hover{transform:translateY(-6px)}
+  .card:focus-within{outline:3px solid var(--seed);outline-offset:4px}
+  .media{position:relative;overflow:hidden}
+  .media img{display:block;width:100%;height:100%;object-fit:cover}
+  .media .tone{position:absolute;inset:0;background:var(--leaf);mix-blend-mode:multiply;opacity:.55}
+
+  /* hero brine animation — the one orchestrated moment */
+  .brine{transform:translateY(60px);animation:rise 1.8s var(--ease) .3s forwards}
+  .brine2{transform:translateY(70px);animation:rise 2s var(--ease) .45s forwards}
+  .seeds{opacity:0;transform:scale(.85);transform-origin:100px 100px;animation:pop .9s var(--spring) 1.2s forwards}
+  .wave{animation:drift 7s ease-in-out 2.2s infinite alternate}
+  @keyframes rise{to{transform:translateY(0)}}
+  @keyframes pop{to{opacity:1;transform:scale(1)}}
+  @keyframes drift{from{transform:translateX(0)}to{transform:translateX(-22px)}}
+  .fade{opacity:0;transform:translateY(14px);animation:up .9s var(--ease) forwards}
+  @keyframes up{to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    .brine,.brine2,.seeds,.fade{animation:none;transform:none;opacity:1}
+    .wave{animation:none}
+    .btn,.card,.link::after{transition:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- reusable logo mark, faithful to Brand-Assets/brinewell-logo.jpg -->
+<svg width="0" height="0" class="absolute" aria-hidden="true">
+  <defs>
+    <clipPath id="slice"><circle cx="100" cy="100" r="84"/></clipPath>
+    <symbol id="mark" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="92" fill="#23452F"/>
+      <circle cx="100" cy="100" r="84" fill="#F3F5E6"/>
+      <g clip-path="url(#slice)">
+        <path d="M0 112 C 25 98, 50 98, 75 112 S 125 126, 150 112 S 185 98, 200 108 L200 200 L0 200 Z" fill="#7FA36B"/>
+        <path d="M0 124 C 25 110, 50 110, 75 124 S 125 138, 150 124 S 185 110, 200 120 L200 200 L0 200 Z" fill="#4E7A4A" opacity=".55"/>
+      </g>
+      <g fill="#C9A227">
+        <ellipse cx="100" cy="62" rx="6" ry="11"/>
+        <ellipse cx="100" cy="62" rx="6" ry="11" transform="rotate(60 100 100)"/>
+        <ellipse cx="100" cy="62" rx="6" ry="11" transform="rotate(120 100 100)"/>
+        <ellipse cx="100" cy="62" rx="6" ry="11" transform="rotate(180 100 100)"/>
+        <ellipse cx="100" cy="62" rx="6" ry="11" transform="rotate(240 100 100)"/>
+        <ellipse cx="100" cy="62" rx="6" ry="11" transform="rotate(300 100 100)"/>
+      </g>
+      <circle cx="100" cy="100" r="9" fill="#23452F"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- NAV (floating layer) -->
+<header class="sticky top-0 z-50 bg-celery/85 backdrop-blur-md border-b border-dill/10">
+  <nav class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between" aria-label="Main">
+    <a href="#top" class="link flex items-center gap-3 after:hidden" aria-label="Brinewell home">
+      <svg class="w-10 h-10"><use href="#mark"/></svg>
+      <span class="display text-[28px]">Brinewell</span>
+    </a>
+    <ul class="hidden md:flex items-center gap-8 text-[17px]">
+      <li><a class="link" href="#pickles">Our pickles</a></li>
+      <li><a class="link" href="#process">How we ferment</a></li>
+      <li><a class="link" href="#stores">Find a store</a></li>
+    </ul>
+    <a href="#pickles" class="btn btn-p !py-3 !px-6 !text-base">Shop pickles</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero-bg grain overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-16 pb-20 md:pt-24 md:pb-28 grid md:grid-cols-[1.1fr_.9fr] gap-12 md:gap-8 items-center">
+      <div>
+        <div class="flex flex-wrap gap-2 mb-6 fade" style="animation-delay:.1s">
+          <span class="tag bg-leaf text-dill">Organic</span>
+          <span class="tag bg-seed text-dill">New batch out now</span>
+        </div>
+        <h1 class="display text-[52px] sm:text-[72px] lg:text-[88px] fade" style="animation-delay:.2s">Pickles that take their time.</h1>
+        <p class="mt-6 text-[19px] text-muted max-w-[34ch] fade" style="animation-delay:.35s">Cucumbers, sea salt, fresh dill and garlic, left in brine for 21 days. No vinegar and nothing else.</p>
+        <div class="mt-10 flex flex-wrap gap-4 fade" style="animation-delay:.5s">
+          <a href="#pickles" class="btn btn-p">Shop pickles</a>
+          <a href="#stores" class="btn btn-o">Find a store</a>
+        </div>
+        <dl class="mt-12 flex gap-10 text-dill fade" style="animation-delay:.65s">
+          <div><dt class="text-sm text-muted">Fermented for</dt><dd class="display text-3xl">21 days</dd></div>
+          <div><dt class="text-sm text-muted">Ingredients</dt><dd class="display text-3xl">5</dd></div>
+          <div><dt class="text-sm text-muted">Since</dt><dd class="display text-3xl">2019</dd></div>
+        </dl>
+      </div>
+
+      <!-- Animated slice: brine rises on load -->
+      <div class="relative justify-self-center w-full max-w-[460px]">
+        <div class="absolute inset-[8%] rounded-full bg-dill/20 blur-3xl translate-y-8" aria-hidden="true"></div>
+        <svg viewBox="0 0 200 200" class="relative w-full drop-shadow-[0_30px_40px_rgba(35,69,47,.25)]" role="img" aria-label="Brinewell cucumber slice mark">
+          <defs><clipPath id="heroSlice"><circle cx="100" cy="100" r="84"/></clipPath></defs>
+          <circle cx="100" cy="100" r="92" fill="#23452F"/>
+          <circle cx="100" cy="100" r="84" fill="#F3F5E6"/>
+          <g clip-path="url(#heroSlice)">
+            <g class="brine"><path d="M0 112 C 25 98, 50 98, 75 112 S 125 126, 150 112 S 185 98, 200 108 L200 200 L0 200 Z" fill="#7FA36B"/></g>
+            <g class="brine2"><path d="M0 124 C 25 110, 50 110, 75 124 S 125 138, 150 124 S 185 110, 200 120 L200 200 L0 200 Z" fill="#4E7A4A" opacity=".55"/></g>
+          </g>
+          <g class="seeds" fill="#C9A227">
+            <ellipse cx="100" cy="62" rx="6" ry="11"/>
+            <ellipse cx="100" cy="62" rx="6" ry="11" transform="rotate(60 100 100)"/>
+            <ellipse cx="100" cy="62" rx="6" ry="11" transform="rotate(120 100 100)"/>
+            <ellipse cx="100" cy="62" rx="6" ry="11" transform="rotate(180 100 100)"/>
+            <ellipse cx="100" cy="62" rx="6" ry="11" transform="rotate(240 100 100)"/>
+            <ellipse cx="100" cy="62" rx="6" ry="11" transform="rotate(300 100 100)"/>
+          </g>
+          <circle cx="100" cy="100" r="9" fill="#23452F"/>
+        </svg>
+        <p class="absolute -bottom-2 right-0 sm:right-4 bg-flesh rounded-2xl px-5 py-3 text-[15px] text-dill font-medium" style="box-shadow:var(--elev-2)">
+          <span class="font-display italic text-lg">Packed by hand</span><br>in Portland, Oregon
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section id="pickles" class="section bg-flesh">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div>
+          <h2 class="display text-[40px] sm:text-[56px]">Our pickles</h2>
+          <p class="mt-3 text-[19px] text-muted max-w-[46ch]">Three recipes, each fermented in small batches and jarred the week it's ready.</p>
+        </div>
+        <a href="#stores" class="btn btn-o self-start md:self-auto">See all stockists</a>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- card -->
+        <article class="card">
+          <div class="media aspect-[4/3]">
+            <img src="https://placehold.co/800x600/4E7A4A/F3F5E6?text=Garlic+Dill+Spears&font=playfair-display" alt="Jar of garlic dill pickle spears" loading="lazy">
+            <div class="tone"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0"></div>
+            <span class="tag bg-leaf text-dill absolute top-4 left-4">Organic</span>
+          </div>
+          <div class="p-6">
+            <div class="flex items-baseline justify-between gap-4">
+              <h3 class="display text-[28px]">Garlic dill spears</h3>
+              <span class="font-bold text-dill text-lg">$11</span>
+            </div>
+            <p class="mt-2 text-muted">Our first recipe. Crisp, sour and heavy on the garlic.</p>
+            <div class="mt-5 flex items-center justify-between">
+              <span class="text-sm text-muted">16 oz (454 g)</span>
+              <button class="btn btn-s !py-3 !px-5 !text-base" type="button">Add to cart</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="media aspect-[4/3]">
+            <img src="https://placehold.co/800x600/23452F/F3F5E6?text=Hot+Chili+Chips&font=playfair-display" alt="Jar of spicy pickle chips" loading="lazy">
+            <div class="tone"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0"></div>
+            <span class="tag bg-flesh border-2 border-deep text-deep absolute top-4 left-4">Spicy</span>
+          </div>
+          <div class="p-6">
+            <div class="flex items-baseline justify-between gap-4">
+              <h3 class="display text-[28px]">Hot chili chips</h3>
+              <span class="font-bold text-dill text-lg">$12</span>
+            </div>
+            <p class="mt-2 text-muted">Crinkle-cut slices with Fresno chili and black pepper.</p>
+            <div class="mt-5 flex items-center justify-between">
+              <span class="text-sm text-muted">16 oz (454 g)</span>
+              <button class="btn btn-s !py-3 !px-5 !text-base" type="button">Add to cart</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="card sm:col-span-2 lg:col-span-1">
+          <div class="media aspect-[4/3]">
+            <img src="https://placehold.co/800x600/7FA36B/23452F?text=Mustard+Seed+Halves&font=playfair-display" alt="Jar of mustard seed pickle halves" loading="lazy">
+            <div class="tone"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0"></div>
+            <span class="tag bg-seed text-dill absolute top-4 left-4">New batch</span>
+          </div>
+          <div class="p-6">
+            <div class="flex items-baseline justify-between gap-4">
+              <h3 class="display text-[28px]">Mustard seed halves</h3>
+              <span class="font-bold text-dill text-lg">$12</span>
+            </div>
+            <p class="mt-2 text-muted">Whole yellow mustard seed and bay leaf. Milder, a little sweet.</p>
+            <div class="mt-5 flex items-center justify-between">
+              <span class="text-sm text-muted">16 oz (454 g)</span>
+              <button class="btn btn-s !py-3 !px-5 !text-base" type="button">Add to cart</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS (a real sequence, so numbered) -->
+  <section id="process" class="section bg-dill text-flesh grain relative overflow-hidden">
+    <svg class="absolute -top-px left-0 w-full h-12 text-flesh" viewBox="0 0 1200 48" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 0 H1200 V18 C 1050 46, 900 46, 750 22 S 450 -4, 300 22 S 100 40, 0 24 Z" fill="currentColor"/>
+    </svg>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 relative">
+      <div class="grid md:grid-cols-[.8fr_1.2fr] gap-12 md:gap-16">
+        <div>
+          <h2 class="display !text-flesh text-[40px] sm:text-[56px]">How a jar gets made</h2>
+          <p class="mt-4 text-[19px] text-flesh/75 max-w-[38ch]">We let lactic fermentation do the work. It's slower than vinegar, and you can taste the difference.</p>
+          <a href="#stores" class="btn btn-s mt-8">Find a store</a>
+        </div>
+        <ol class="grid sm:grid-cols-2 gap-5">
+          <li class="rounded-3xl bg-flesh/[.06] border border-flesh/10 p-7">
+            <span class="display !text-seed text-5xl">1</span>
+            <h3 class="display !text-flesh text-2xl mt-4">Pick</h3>
+            <p class="mt-2 text-flesh/75">Pickling cucumbers come from two farms in the Willamette Valley, picked small and firm.</p>
+          </li>
+          <li class="rounded-3xl bg-flesh/[.06] border border-flesh/10 p-7">
+            <span class="display !text-seed text-5xl">2</span>
+            <h3 class="display !text-flesh text-2xl mt-4">Pack</h3>
+            <p class="mt-2 text-flesh/75">Each crock is packed by hand with dill, garlic and spices the same day.</p>
+          </li>
+          <li class="rounded-3xl bg-flesh/[.06] border border-flesh/10 p-7">
+            <span class="display !text-seed text-5xl">3</span>
+            <h3 class="display !text-flesh text-2xl mt-4">Ferment</h3>
+            <p class="mt-2 text-flesh/75">Sea salt brine and 21 days at cellar temperature turn them sour on their own.</p>
+          </li>
+          <li class="rounded-3xl bg-flesh/[.06] border border-flesh/10 p-7">
+            <span class="display !text-seed text-5xl">4</span>
+            <h3 class="display !text-flesh text-2xl mt-4">Jar</h3>
+            <p class="mt-2 text-flesh/75">Jarred raw and kept cold, so the live cultures are still there when you open it.</p>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <section class="section">
+    <figure class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+      <svg class="w-14 h-14 mx-auto mb-8" aria-hidden="true"><use href="#mark"/></svg>
+      <blockquote class="font-display italic text-[30px] sm:text-[42px] leading-[1.25] tracking-[-0.02em] text-dill">“The only pickle I've found that still snaps after a week in the fridge. Our sandwich counter goes through a case every three days.”</blockquote>
+      <figcaption class="mt-8 text-muted text-[17px]"><span class="font-bold text-dill">Placeholder Name</span>, owner of a Portland deli</figcaption>
+    </figure>
+  </section>
+
+  <!-- STORES + NEWSLETTER -->
+  <section id="stores" class="pb-[var(--s-6)]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-6">
+      <div class="bg-flesh rounded-3xl p-8 sm:p-10" style="box-shadow:var(--elev-1)">
+        <h2 class="display text-[34px] sm:text-[42px]">Find a store</h2>
+        <p class="mt-3 text-muted">Sold in the fridge section at over 60 grocers in Oregon and Washington.</p>
+        <form class="mt-8 flex flex-col sm:flex-row gap-3" onsubmit="event.preventDefault()">
+          <label for="zip" class="sr-only">ZIP code</label>
+          <input id="zip" inputmode="numeric" placeholder="Your ZIP code" class="flex-1 bg-white border-2 border-deep rounded-2xl px-5 py-4 text-[17px] text-ink placeholder:text-muted focus:outline-none focus-visible:ring-4 focus-visible:ring-seed/60">
+          <button class="btn btn-p" type="submit">Search stores</button>
+        </form>
+      </div>
+      <div class="bg-dill rounded-3xl p-8 sm:p-10 grain relative overflow-hidden" style="box-shadow:var(--elev-2)">
+        <h2 class="display !text-flesh text-[34px] sm:text-[42px]">Join the club</h2>
+        <p class="mt-3 text-flesh/75">One email when a new batch is ready. Members get first pick of limited recipes.</p>
+        <form class="mt-8 flex flex-col sm:flex-row gap-3" onsubmit="event.preventDefault()">
+          <label for="email" class="sr-only">Email address</label>
+          <input id="email" type="email" placeholder="Your email address" class="flex-1 bg-white border-2 border-white rounded-2xl px-5 py-4 text-[17px] text-ink placeholder:text-muted focus:outline-none focus-visible:ring-4 focus-visible:ring-seed/70">
+          <button class="btn btn-s" type="submit">Join the club</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t-2 border-dill">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 py-10 flex flex-col md:flex-row gap-6 md:items-center justify-between">
+    <a href="#top" class="link flex items-center gap-3 after:hidden" aria-label="Back to top">
+      <svg class="w-9 h-9"><use href="#mark"/></svg>
+      <span class="display text-2xl">Brinewell</span>
+    </a>
+    <ul class="flex flex-wrap gap-6 text-[16px]">
+      <li><a class="link" href="#pickles">Our pickles</a></li>
+      <li><a class="link" href="#process">How we ferment</a></li>
+      <li><a class="link" href="#stores">Find a store</a></li>
+      <li><a class="link" href="#">Wholesale</a></li>
+    </ul>
+    <p class="text-muted text-[15px]">© 2026 Brinewell. Small-batch ferments since 2019.</p>
+  </div>
+</footer>
+
+</body>
+</html>
